@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Birthday Reminder</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_add_birthday">AddBirthdayActivity</string>
+    <string name="name">Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="bithday_date">Birthday date</string>
+    <string name="time">Reminder Time</string>
+    <string name="notification">Show Notification</string>
+
+</resources>
