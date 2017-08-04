@@ -13,6 +13,7 @@ public class Birthday implements Serializable{
     private long id;
     private String name;
     private String email;
+    private byte[] image;
     private Date date;
     private boolean notify;
 
@@ -20,26 +21,29 @@ public class Birthday implements Serializable{
 //        this(0, "", "", Calendar.getInstance(), false);
 //    }
 
-    public Birthday(long id, String name, String email, Date date, boolean notify){
+    public Birthday(long id, String name, String email, byte[] image, Date date, boolean notify){
         this.id = id;
         this.name = name;
         this.email = email;
+        this.image = image;
         this.date = date;
         this.notify = notify;
     }
 
-    public Birthday(long id, String name, String email, Calendar calendar, boolean notify){
-        this.id=id;
-        this.name = name;
-        this.email = email;
-        this.notify = notify;
-    }
+//    public Birthday(long id, String name, String email, Calendar calendar, boolean notify){
+//        this.id=id;
+//        this.name = name;
+//        this.email = email;
+//        this.notify = notify;
+//    }
 
     public long getId(){return id;}
 
     public String getName(){return  name;}
 
     public String getEmail(){return email;}
+
+    public byte[] getImage(){return image;}
 
     public Date getDate(){return date;}
 
@@ -60,6 +64,8 @@ public class Birthday implements Serializable{
     public void setName(String name){this.name = name;}
 
     public void setEmail(String email){this.email = email;}
+
+    public void setImage(byte[] image){this.image = image;}
 
     public void setNotify(boolean notify) {
         this.notify = notify;

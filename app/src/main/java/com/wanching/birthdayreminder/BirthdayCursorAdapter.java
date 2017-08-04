@@ -31,11 +31,17 @@ public class BirthdayCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
+        String name = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME));
+        String email = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL));
+        Long date = cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE));
+        Date formattedDate = new Date(date);
+
         birthday = new Birthday(
                 cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)),
-                cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME)),
-                cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL)),
-                new Date(cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE))),
+                name,
+                email,
+                cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE)),
+                formattedDate,
                 changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY))));
 
         Birthday.Countdown countdown = birthday.getCountdown();
@@ -46,11 +52,6 @@ public class BirthdayCursorAdapter extends CursorAdapter {
         TextView tvDay = view.findViewById(R.id.day);
         TextView tvCountdown = view.findViewById(R.id.countdown);
         TextView tvAge = view.findViewById(R.id.new_age);
-
-        String name = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME));
-        String email = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL));
-        Long date = cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE));
-        Date formattedDate = new Date(date);
 
         long duration = Calendar.getInstance().getTimeInMillis() - formattedDate.getTime();
         int newAge = Integer.parseInt(Long.toString(duration)) + 1;
