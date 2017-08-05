@@ -5,14 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -94,11 +90,11 @@ public class AddBirthdayActivity extends AppCompatActivity {
                     newDate = formatter.parse(date);
 
                     BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
-                    Birthday birthday = new Birthday(0, name, email, phone, photo, newDate, false);
+                    Person person = new Person(0, name, email, phone, photo, newDate, false);
 
-                    if (dbq.insert(birthday) != 0) {
+                    if (dbq.insert(person) != 0) {
                         saved = true;
-                        Toast.makeText(AddBirthdayActivity.this, "Birthday inserted successfully!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddBirthdayActivity.this, "Person inserted successfully!", Toast.LENGTH_SHORT).show();
 
                         finish();
                     }

@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * Created by WanChing on 4/8/2017.
  */
 
-public class Birthday implements Serializable{
+public class Person implements Serializable{
     private long id;
     private String name;
     private String email;
@@ -18,11 +18,11 @@ public class Birthday implements Serializable{
     private Date date;
     private boolean notify;
 
-//    public Birthday(long aLong, String string, String cursorString, long cursorLong){
+//    public Person(long aLong, String string, String cursorString, long cursorLong){
 //        this(0, "", "", Calendar.getInstance(), false);
 //    }
 
-    public Birthday(long id, String name, String email, String phone, byte[] image, Date date, boolean notify){
+    public Person(long id, String name, String email, String phone, byte[] image, Date date, boolean notify){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,7 +32,7 @@ public class Birthday implements Serializable{
         this.notify = notify;
     }
 
-//    public Birthday(long id, String name, String email, Calendar calendar, boolean notify){
+//    public Person(long id, String name, String email, Calendar calendar, boolean notify){
 //        this.id=id;
 //        this.name = name;
 //        this.email = email;

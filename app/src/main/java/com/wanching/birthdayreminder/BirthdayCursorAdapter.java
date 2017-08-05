@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.format.DateFormat;
 
-import org.w3c.dom.Text;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -23,7 +21,7 @@ import java.util.Date;
 public class BirthdayCursorAdapter extends CursorAdapter {
 
     private LayoutInflater inflater;
-    private Birthday birthday;
+    private Person person;
 
     public BirthdayCursorAdapter(Context context, Cursor cursor, int flags){
         super(context, cursor, flags);
@@ -40,7 +38,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
         Long date = cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE));
         Date formattedDate = new Date(date);
 
-        birthday = new Birthday(
+        person = new Person(
                 cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)),
                 name,
                 email,
@@ -49,7 +47,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
                 formattedDate,
                 changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY))));
 
-        Birthday.Countdown countdown = birthday.getCountdown();
+        Person.Countdown countdown = person.getCountdown();
 
         TextView tvName = view.findViewById(R.id.name);
         TextView tvEmail =  view.findViewById(R.id.email);
@@ -69,7 +67,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
         tvDay.setText(DateFormat.format("dd", formattedDate));
         ivImage.setImageBitmap(BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length));
 
-        if(Calendar.getInstance().get(Calendar.MONTH) < birthday.getDateAsCalendar().get(Calendar.MONTH)){
+        if(Calendar.getInstance().get(Calendar.MONTH) < person.getDateAsCalendar().get(Calendar.MONTH)){
             tvCountdown.setText("Coming\nIn\n" +(Integer.parseInt(Long.toString(countdown.getDays()))-(newAge * 365)) + "\nDays");
             tvAge.setText("Turning " + (newAge+1));
         }

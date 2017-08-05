@@ -30,19 +30,19 @@ public class BirthdayDbQueries {
                 );
     }
 
-    public long insert (Birthday birthday){
+    public long insert (Person person){
         SQLiteDatabase db = helper.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME, birthday.getName());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL, birthday.getEmail());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE, birthday.getPhone());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, birthday.getImage());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE, birthday.getDateAsCalendar().getTimeInMillis());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY, birthday.isNotify());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME, person.getName());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL, person.getEmail());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE, person.getPhone());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, person.getImage());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE, person.getDateAsCalendar().getTimeInMillis());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY, person.isNotify());
 
         long id = db.insert(BirthdayContract.BirthdayEntry.TABLE_NAME, null, values);
-        birthday.setId(id);
+        person.setId(id);
 
         return id;
     }

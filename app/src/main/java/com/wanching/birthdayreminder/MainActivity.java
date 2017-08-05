@@ -17,6 +17,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListView listView;
+    public static final String EXTRA_ID = "com.wanching.birthdayreminder.Birthdat.ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +41,11 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
+                Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
 
-
+                Intent intent = new Intent(MainActivity.this, ViewBirthdayActivity.class);
+                intent.putExtra(EXTRA_ID, cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)));
+                startActivity(intent);
             }
         });
     }

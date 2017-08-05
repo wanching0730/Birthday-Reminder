@@ -1,123 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
-    tools:context="com.wanching.birthdayreminder.ViewBirthdayActivity"
-    android:weightSum="1">
-
-    <TextView
-        android:id="@+id/title"
-        android:text="@string/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16dp"
-        android:layout_margin="16dp"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:id="@+id/description"
-        android:text="@string/email_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="16dp"/>
-
-    <TextView
-        android:id="@+id/date"
-        android:text="@string/bithday_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="16dp"
-        android:textStyle="bold"/>
+    tools:context="com.wanching.birthdayreminder.ViewBirthdayActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/day"
-            android:text="00"
-            android:layout_width="0dp"
+            android:id="@+id/show_name"
+            android:text="@string/name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="26dp"/>
+            android:textSize="16dp"
+            android:layout_margin="16dp"
+            android:textStyle="bold"/>
 
         <TextView
-            android:layout_width="0dp"
-            android:text="d"
+            android:id="@+id/show_email"
+            android:text="@string/email_address"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="16dp"
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/hour"
-            android:text="00"
-            android:layout_width="0dp"
+            android:id="@+id/show_phone"
+            android:text="@string/phone"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="26dp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:text="h"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_margin="16dp"
             android:textSize="16dp"/>
 
         <TextView
-            android:id="@+id/minute"
-            android:text="00"
-            android:layout_width="0dp"
+            android:id="@+id/date"
+            android:text="@string/bithday_date"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="26dp"/>
+            android:layout_margin="16dp"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/day"
+                android:text="00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="26dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="d"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/hour"
+                android:text="00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="26dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="h"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/minute"
+                android:text="00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="26dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="m"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"/>
+
+            <TextView
+                android:id="@+id/second"
+                android:text="00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textSize="26dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:text="s"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="16dp"/>
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="0dp"
-            android:text="m"
+            android:id="@+id/left"
+            android:text="@string/day_left"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="16dp"/>
-
-        <TextView
-            android:id="@+id/second"
-            android:text="00"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textSize="26dp"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:text="s"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="16dp"/>
+            android:layout_margin="16dp"
+            android:textSize="16dp"
+            android:textStyle="bold|italic"/>
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/left"
-        android:text="Left"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textSize="16dp"/>
+        android:layout_margin="16sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <ImageButton
+                android:id="@+id/edit"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_edit" />
+
+            <ImageButton
+                android:id="@+id/message"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/sym_action_email" />
+
+            <ImageButton
+                android:id="@+id/delete"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@android:drawable/ic_menu_delete" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
 
