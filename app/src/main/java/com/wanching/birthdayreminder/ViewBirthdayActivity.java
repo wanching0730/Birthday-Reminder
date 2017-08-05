@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class ViewBirthdayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_birthday);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -79,7 +82,7 @@ public class ViewBirthdayActivity extends AppCompatActivity {
             tvName.setText(person.getName());
             tvEmail.setText(person.getEmail());
             tvPhone.setText(person.getPhone());
-            tvDate.setText(new SimpleDateFormat("EEEE, d MMMM, yyyy").format(person.getDate()));
+            tvDate.setText(new SimpleDateFormat("d MMM, ").format(person.getDate()) + Calendar.getInstance().get(Calendar.YEAR));
             tvDay.setText(Long.toString(countdown.getDays()));
             tvHour.setText(Long.toString(countdown.getHours()));
             tvMinute.setText(Long.toString(countdown.getMinutes()));

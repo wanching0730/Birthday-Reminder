@@ -2,128 +2,152 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.wanching.birthdayreminder.ViewBirthdayActivity">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/show_name"
-            android:text="@string/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:layout_margin="16dp"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/show_email"
-            android:text="@string/email_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="16dp"/>
-
-        <TextView
-            android:id="@+id/show_phone"
-            android:text="@string/phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="16dp"/>
-
-        <TextView
-            android:id="@+id/date"
-            android:text="@string/bithday_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="16dp"
-            android:textStyle="bold"/>
+        android:layout_below="@id/appbar_layout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/day"
-                android:text="00"
-                android:layout_width="0dp"
+                android:id="@+id/show_name"
+                android:text="@string/name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textSize="26dp"/>
+                android:textSize="16dp"
+                android:layout_margin="16dp"
+                android:textStyle="bold"/>
 
             <TextView
-                android:layout_width="0dp"
-                android:text="d"
+                android:id="@+id/show_email"
+                android:text="@string/email_address"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="16dp"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/hour"
-                android:text="00"
-                android:layout_width="0dp"
+                android:id="@+id/show_phone"
+                android:text="@string/phone"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textSize="26dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:text="h"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_margin="16dp"
                 android:textSize="16dp"/>
 
             <TextView
-                android:id="@+id/minute"
-                android:text="00"
-                android:layout_width="0dp"
+                android:id="@+id/date"
+                android:text="@string/bithday_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textSize="26dp"/>
+                android:layout_margin="16dp"
+                android:textSize="16dp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/day"
+                    android:text="00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="26dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="d"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/hour"
+                    android:text="00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="26dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="h"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/minute"
+                    android:text="00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="26dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="m"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/second"
+                    android:text="00"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:textSize="26dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:text="s"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16dp"/>
+
+            </LinearLayout>
 
             <TextView
-                android:layout_width="0dp"
-                android:text="m"
+                android:id="@+id/left"
+                android:text="@string/day_left"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16dp"/>
-
-            <TextView
-                android:id="@+id/second"
-                android:text="00"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:textSize="26dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:text="s"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="16dp"/>
+                android:layout_margin="16dp"
+                android:textSize="16dp"
+                android:textStyle="bold|italic"/>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/left"
-            android:text="@string/day_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="16dp"
-            android:textStyle="bold|italic"/>
 
-    </LinearLayout>
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
