@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
 
     private ImageView ivImage;
 
-    private Bitmap bitmap;
+    private static Bitmap bitmap;
 
     private boolean saved = false;
 
@@ -166,25 +167,31 @@ public class AddBirthdayActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        String title = sharedPreferences.getString("SAVE_STATE_TITLE", "");
-        String desc = sharedPreferences.getString("SAVE_STATE_DESC", "");
+        String name = sharedPreferences.getString("SAVE_STATE_NAME", "");
+        String email = sharedPreferences.getString("SAVE_STATE_EMAIL", "");
+        String image = sharedPreferences.getString("SAVE_STATE_IMAGE", "");
         String date = sharedPreferences.getString("SAVE_STATE_DATE", "");
         String time = sharedPreferences.getString("SAVE_STATE_TIME", "");
 
-        etTitle.setText(title);
-        etDesc.setText(desc);
+        etName.setText(name);
+        etEmail.setText(email);
         etDate.setText(date);
         etTime.setText(time);
+        ivImage.setImageBitmap(decodeToBase64(image));
     }
 
     public static String encodeToBase64(Bitmap image){
-        Bitmap newImage = image;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        newImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] b = baos.toByteArray();
         String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
 
         Log.d("Image Log:", imageEncoded);
         return  imageEncoded;
+    }
+
+    public static Bitmap decodeToBase64 (String input){
+        byte[] decodeByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
     }
 }
