@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY};
 
-        Cursor cursor = dbq.read(columns, null, null, null, null, n BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME + " ASC");
+        Cursor cursor = dbq.read(columns, null, null, null, null, BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME + " ASC");
 
         BirthdayCursorAdapter adapter = new BirthdayCursorAdapter(this, cursor,0);
         listView.setAdapter(adapter);

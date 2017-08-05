@@ -13,6 +13,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -103,7 +104,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
                     }
                 }catch (ParseException ex){
                     ex.printStackTrace();
-                    Toast.makeText(AddBirthdayActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBirthdayActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -135,7 +136,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
     }
 
     public void SetTime(View view){
-        DialogFragment fragment = new TImePickerFragment();
+        DialogFragment fragment = new TimePickerFragment();
         fragment.show(getSupportFragmentManager(), "timePicker");
 
     }
@@ -147,14 +148,14 @@ public class AddBirthdayActivity extends AppCompatActivity {
             editor.clear();
         }
         else{
-            String title = etName.getText().toString();
-            String desc = etEmail.getText().toString();
+            String name = etName.getText().toString();
+            String email = etEmail.getText().toString();
             String date = etDate.getText().toString();
             String time = etTime.getText().toString();
-            Bitmap
 
-            editor.putString("SAVE_STATE_TITLE", title);
-            editor.putString("SAVE_STATE_DESC", desc);
+            editor.putString("SAVE_STATE_NAME", name);
+            editor.putString("SAVE_STATE_EMAIL", email);
+            editor.putString("SAVE_STATE_IMAGE", encodeToBase64(bitmap));
             editor.putString("SAVE_STATE_DATE", date);
             editor.putString("SAVE_STATE_TIME", time);
         }
@@ -162,4 +163,28 @@ public class AddBirthdayActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    protected void onResume() {
+        super.onResume();
+
+        String title = sharedPreferences.getString("SAVE_STATE_TITLE", "");
+        String desc = sharedPreferences.getString("SAVE_STATE_DESC", "");
+        String date = sharedPreferences.getString("SAVE_STATE_DATE", "");
+        String time = sharedPreferences.getString("SAVE_STATE_TIME", "");
+
+        etTitle.setText(title);
+        etDesc.setText(desc);
+        etDate.setText(date);
+        etTime.setText(time);
+    }
+
+    public static String encodeToBase64(Bitmap image){
+        Bitmap newImage = image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        newImage.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        Log.d("Image Log:", imageEncoded);
+        return  imageEncoded;
+    }
 }
