@@ -36,6 +36,7 @@ public class BirthdayDbQueries {
 
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME, birthday.getName());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL, birthday.getEmail());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE, birthday.getPhone());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, birthday.getImage());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE, birthday.getDateAsCalendar().getTimeInMillis());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY, birthday.isNotify());

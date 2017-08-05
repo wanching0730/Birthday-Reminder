@@ -22,7 +22,8 @@
         <activity
             android:name=".AddBirthdayActivity"
             android:label="@string/title_activity_add_birthday"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ViewBirthdayActivity"></activity>
     </application>
 
 </manifest>

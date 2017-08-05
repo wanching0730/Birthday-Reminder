@@ -2,10 +2,12 @@ package com.wanching.birthdayreminder;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.text.format.DateFormat;
 
@@ -33,6 +35,8 @@ public class BirthdayCursorAdapter extends CursorAdapter {
 
         String name = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME));
         String email = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL));
+        String phone = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE));
+        byte[] imageByte = cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE));
         Long date = cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE));
         Date formattedDate = new Date(date);
 
@@ -40,7 +44,8 @@ public class BirthdayCursorAdapter extends CursorAdapter {
                 cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)),
                 name,
                 email,
-                cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE)),
+                phone,
+                imageByte,
                 formattedDate,
                 changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY))));
 
@@ -48,20 +53,30 @@ public class BirthdayCursorAdapter extends CursorAdapter {
 
         TextView tvName = view.findViewById(R.id.name);
         TextView tvEmail =  view.findViewById(R.id.email);
+        TextView tvPhone = view.findViewById(R.id.phone);
         TextView tvMonth = view.findViewById(R.id.month);
         TextView tvDay = view.findViewById(R.id.day);
         TextView tvCountdown = view.findViewById(R.id.countdown);
         TextView tvAge = view.findViewById(R.id.new_age);
+        ImageView ivImage = view.findViewById(R.id.image);
 
-        long duration = Calendar.getInstance().getTimeInMillis() - formattedDate.getTime();
-        int newAge = Integer.parseInt(Long.toString(duration)) + 1;
+        int newAge = Integer.parseInt(Long.toString(countdown.getDays()))/365;
 
         tvName.setText(name);
         tvEmail.setText(email);
+        tvPhone.setText(phone);
         tvMonth.setText(DateFormat.format("MMM", formattedDate));
         tvDay.setText(DateFormat.format("dd", formattedDate));
-        tvCountdown.setText("In " + Long.toString(countdown.getDays()) + " days");
-        tvAge.setText("Turning " + newAge);
+        ivImage.setImageBitmap(BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length));
+
+        if(Calendar.getInstance().get(Calendar.MONTH) < birthday.getDateAsCalendar().get(Calendar.MONTH)){
+            tvCountdown.setText("Coming\nIn\n" +(Integer.parseInt(Long.toString(countdown.getDays()))-(newAge * 365)) + "\nDays");
+            tvAge.setText("Turning " + (newAge+1));
+        }
+        else{
+            tvCountdown.setText((Integer.parseInt(Long.toString(countdown.getDays()))-(newAge * 365)) + "\nDays\nAgo");
+            tvAge.setText("Turned " + newAge);
+        }
     }
 
     @Override

@@ -18,6 +18,7 @@ public class BirthdayDbHelper extends SQLiteOpenHelper {
                     BirthdayContract.BirthdayEntry._ID + " INTEGER PRIMARY KEY," +
                     BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME + " TEXT," +
                     BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL + " TEXT," +
+                    BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE + " TEXT," +
                     BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE + " BLOB," +
                     BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE + " INTEGER," +
                     BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY + " INTEGER)";

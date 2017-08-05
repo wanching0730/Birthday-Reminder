@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
+                //Cursor cursor = (Cursor)adapterView.getItemAtPosition(position);
 
 
             }
@@ -57,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 BirthdayContract.BirthdayEntry._ID,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL,
+                BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE,
                 BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY};
 
-        Cursor cursor = dbq.read(columns, null, null, null, null, BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME + " ASC");
+        Cursor cursor = dbq.read(columns, null, null, null, null, BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE + " ASC");
 
         BirthdayCursorAdapter adapter = new BirthdayCursorAdapter(this, cursor,0);
         listView.setAdapter(adapter);

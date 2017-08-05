@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
@@ -32,8 +33,8 @@ public class AddBirthdayActivity extends AppCompatActivity {
 
     private EditText etName;
     private EditText etEmail;
+    private  EditText etPhone;
     private EditText etDate;
-    private EditText etTime;
 
     private static final int SELECT_IMAGE = 1;
 
@@ -61,9 +62,9 @@ public class AddBirthdayActivity extends AppCompatActivity {
 
         etName = (EditText) findViewById(R.id.add_name);
         etEmail = (EditText) findViewById(R.id.add_email);
+        etPhone = (EditText) findViewById(R.id.add_phone);
         ivImage = (ImageView) findViewById(R.id.person_image);
         etDate = (EditText) findViewById(R.id.date_selection);
-        etTime = (EditText) findViewById(R.id.time_selection);
 
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,20 +83,18 @@ public class AddBirthdayActivity extends AppCompatActivity {
                 try{
                     String name = etName.getText().toString();
                     String email = etEmail.getText().toString();
+                    String phone = etPhone.getText().toString();
                     String date = etDate.getText().toString();
-                    String time = etTime.getText().toString();
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
                     byte [] photo = baos.toByteArray();
 
-                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy HH:mm", Locale.ENGLISH);
-
-                    String combination = date + " " + time;
-                    newDate = formatter.parse(combination);
+                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
+                    newDate = formatter.parse(date);
 
                     BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
-                    Birthday birthday = new Birthday(0, name, email, photo, newDate, false);
+                    Birthday birthday = new Birthday(0, name, email, phone, photo, newDate, false);
 
                     if (dbq.insert(birthday) != 0) {
                         saved = true;
@@ -107,7 +106,6 @@ public class AddBirthdayActivity extends AppCompatActivity {
                     ex.printStackTrace();
                     Toast.makeText(AddBirthdayActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
@@ -133,13 +131,6 @@ public class AddBirthdayActivity extends AppCompatActivity {
     public void SetDate(View view){
         DialogFragment fragment = new DatePickerFragment();
         fragment.show(getSupportFragmentManager(), "datePicker");
-
-    }
-
-    public void SetTime(View view){
-        DialogFragment fragment = new TimePickerFragment();
-        fragment.show(getSupportFragmentManager(), "timePicker");
-
     }
 
     protected void onPause() {
@@ -151,14 +142,16 @@ public class AddBirthdayActivity extends AppCompatActivity {
         else{
             String name = etName.getText().toString();
             String email = etEmail.getText().toString();
+            String phone = etPhone.getText().toString();
             String date = etDate.getText().toString();
-            String time = etTime.getText().toString();
 
             editor.putString("SAVE_STATE_NAME", name);
             editor.putString("SAVE_STATE_EMAIL", email);
-            editor.putString("SAVE_STATE_IMAGE", encodeToBase64(bitmap));
+            editor.putString("SAVE_STATE_PHONE", phone);
             editor.putString("SAVE_STATE_DATE", date);
-            editor.putString("SAVE_STATE_TIME", time);
+
+            if(bitmap != null)
+                editor.putString("SAVE_STATE_IMAGE", encodeToBase64(bitmap));
         }
 
         editor.commit();
@@ -169,15 +162,21 @@ public class AddBirthdayActivity extends AppCompatActivity {
 
         String name = sharedPreferences.getString("SAVE_STATE_NAME", "");
         String email = sharedPreferences.getString("SAVE_STATE_EMAIL", "");
-        String image = sharedPreferences.getString("SAVE_STATE_IMAGE", "");
+        String phone = sharedPreferences.getString("SAVE_STATE_PHONE", "");
         String date = sharedPreferences.getString("SAVE_STATE_DATE", "");
         String time = sharedPreferences.getString("SAVE_STATE_TIME", "");
 
         etName.setText(name);
         etEmail.setText(email);
+        etPhone.setText(phone);
         etDate.setText(date);
-        etTime.setText(time);
-        ivImage.setImageBitmap(decodeToBase64(image));
+
+        if(bitmap == null)
+            ivImage.setImageResource(R.drawable.login);
+        else{
+            String image = sharedPreferences.getString("SAVE_STATE_IMAGE", "");
+            ivImage.setImageBitmap(decodeToBase64(image));
+        }
     }
 
     public static String encodeToBase64(Bitmap image){

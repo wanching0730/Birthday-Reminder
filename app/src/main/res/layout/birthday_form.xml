@@ -8,15 +8,14 @@
     android:orientation="vertical"
     android:layout_margin="16dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.wanching.birthdayreminder.AddBirthdayActivity"
-    android:weightSum="1">
+    tools:context="com.wanching.birthdayreminder.AddBirthdayActivity">
 
     <ImageView
         android:id="@+id/person_image"
-        android:layout_width="180dp"
-        android:layout_height="130dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:src="@drawable/download"/>
+        android:src="@mipmap/ic_launcher_round"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +26,8 @@
     <EditText
         android:id="@+id/add_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="text"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -38,7 +38,20 @@
     <EditText
         android:id="@+id/add_email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/add_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -53,20 +66,6 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:onClick="SetDate"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/time"
-        android:layout_margin="16dp"/>
-
-    <EditText
-        android:id="@+id/time_selection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusableInTouchMode="false"
-        android:focusable="false"
-        android:onClick="SetTime"/>
 
     <Switch
         android:text="@string/notification"
