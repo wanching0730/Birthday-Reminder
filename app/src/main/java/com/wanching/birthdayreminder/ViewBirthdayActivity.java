@@ -72,9 +72,8 @@ public class ViewBirthdayActivity extends AppCompatActivity {
                     changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY)))
             );
 
-            setTitle(person.getName());
+            setTitle(getResources().getString(R.string.birthday_wish) + " to " + person.getName());
 
-            TextView tvName = (TextView) findViewById(R.id.show_name);
             TextView tvEmail = (TextView) findViewById(R.id.show_email);
             TextView tvPhone = (TextView) findViewById(R.id.show_phone);
             TextView tvDate = (TextView) findViewById(R.id.date);
@@ -89,10 +88,9 @@ public class ViewBirthdayActivity extends AppCompatActivity {
             final Calendar thisYearBirthday = Calendar.getInstance();
             thisYearBirthday.set(todayDate.get(Calendar.YEAR), person.getDateAsCalendar().get(Calendar.MONTH), person.getDateAsCalendar().get(Calendar.DAY_OF_MONTH));
 
-            tvName.setText(person.getName());
-            tvEmail.setText(person.getEmail());
-            tvPhone.setText(person.getPhone());
-            tvDate.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(thisYearBirthday.getTime()));
+            tvEmail.setText("Email: " + person.getEmail());
+            tvPhone.setText("Phone: " + person.getPhone());
+            tvDate.setText("Bithday: " + new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(thisYearBirthday.getTime()));
             tvDay.setText(Long.toString(countdown.getDays()));
             tvHour.setText(Long.toString(countdown.getHours()));
             tvMinute.setText(Long.toString(countdown.getMinutes()));

@@ -89,6 +89,7 @@ public class UpdateBirthdayActivity extends AppCompatActivity {
 
                 BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
                 dbq.update(person);
+                Toast.makeText(UpdateBirthdayActivity.this, "Record updated successfully", Toast.LENGTH_SHORT).show();
 
                 finish();
             }

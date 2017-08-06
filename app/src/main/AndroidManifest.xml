@@ -39,7 +39,11 @@
         <activity
             android:name=".UpdateBirthdayActivity"
             android:label="@string/title_activity_update_birthday"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ViewBirthdayActivity" />
+        </activity>
     </application>
 
 </manifest>
