@@ -9,5 +9,6 @@
     <string name="notification">Show Notification</string>
     <string name="title_activity_update_birthday">UpdateBirthdayActivity</string>
     <string name="delete_all">Delete All</string>
+    <string name="birthday_wish">Happy Birthday</string>
 
 </resources>

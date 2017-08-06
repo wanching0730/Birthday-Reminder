@@ -7,11 +7,13 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_height="match_parent"
         android:src="@drawable/download"
         android:layout_weight="1"
-        android:layout_marginLeft="12sp"/>
+        android:layout_marginLeft="12sp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="false"/>
 
     <LinearLayout
         android:layout_width="0dp"
@@ -23,7 +25,7 @@
         <TextView
             android:id="@+id/name"
             android:text="name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20sp"/>
@@ -31,21 +33,21 @@
         <TextView
             android:id="@+id/new_age"
             android:text="New Age"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/email"
             android:text="Email"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/phone"
             android:text="Phone"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
@@ -54,14 +56,15 @@
     <TextView
         android:id="@+id/countdown"
         android:text="Tomorrow"
-        android:layout_width="wrap_content"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:gravity="center"
         android:layout_marginTop="16sp"
         android:textSize="16sp"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
@@ -71,13 +74,13 @@
         <TextView
             android:id="@+id/month"
             android:text="Month"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/day"
             android:text="Day"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

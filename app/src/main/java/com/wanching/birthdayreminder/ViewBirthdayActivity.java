@@ -23,6 +23,7 @@ import java.util.Date;
 public class ViewBirthdayActivity extends AppCompatActivity {
 
     public static final String EXTRA_BIRTHDAY = "com.wanching.birthdayreminder.BIRTHDAY";
+    public static final String EXTRA_MESSAGE = "com.wanching.birthdayreminder.MESSAGE";
     private Person person;
     private ImageButton btnEdit;
     private ImageButton btnMessage;
@@ -118,6 +119,15 @@ public class ViewBirthdayActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_BIRTHDAY, person);
         if(intent.resolveActivity(getPackageManager()) != null)
             startActivity(intent);
+    }
+
+    public void messageWish(View view){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(EXTRA_BIRTHDAY, R.string.birthday_wish);
+        Intent chooser = new Intent(Intent.createChooser(intent, "Please select an app to send your wishes"));
+        if(intent.resolveActivity(getPackageManager()) != null)
+            startActivity(chooser);
     }
 
     public  void deleteBirthday (View view){
