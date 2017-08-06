@@ -3,12 +3,13 @@
     <string name="title_activity_add_birthday">AddBirthdayActivity</string>
     <string name="name">Name</string>
     <string name="email_address">Email Address</string>
-    <string name="bithday_date">Birthday date</string>
+    <string name="bithday_date">Birthday</string>
     <string name="phone">Phone number</string>
     <string name="day_left">Left</string>
     <string name="notification">Show Notification</string>
     <string name="title_activity_update_birthday">UpdateBirthdayActivity</string>
     <string name="delete_all">Delete All</string>
     <string name="birthday_wish">Happy Birthday</string>
+    <string name="add_photo">Add a photo here</string>
 
 </resources>

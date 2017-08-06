@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,15 +21,13 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class ViewBirthdayActivity extends AppCompatActivity {
 
     public static final String EXTRA_BIRTHDAY = "com.wanching.birthdayreminder.BIRTHDAY";
     public static final String EXTRA_MESSAGE = "com.wanching.birthdayreminder.MESSAGE";
     private Person person;
-    private ImageButton btnEdit;
-    private ImageButton btnMessage;
-    private ImageButton btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +92,7 @@ public class ViewBirthdayActivity extends AppCompatActivity {
             tvName.setText(person.getName());
             tvEmail.setText(person.getEmail());
             tvPhone.setText(person.getPhone());
-            tvDate.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy").format(thisYearBirthday.getTime()));
+            tvDate.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).format(thisYearBirthday.getTime()));
             tvDay.setText(Long.toString(countdown.getDays()));
             tvHour.setText(Long.toString(countdown.getHours()));
             tvMinute.setText(Long.toString(countdown.getMinutes()));

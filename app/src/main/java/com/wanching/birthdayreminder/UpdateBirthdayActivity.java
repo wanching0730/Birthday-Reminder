@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class UpdateBirthdayActivity extends AppCompatActivity {
 
@@ -75,7 +76,7 @@ public class UpdateBirthdayActivity extends AppCompatActivity {
                 String date = etDate.getText().toString();
 
                 try{
-                    formattedDate = new SimpleDateFormat("EEEE, MMMM d, yyyy").parse(date);
+                    formattedDate = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH).parse(date);
                 }catch (ParseException ex){
                     ex.printStackTrace();
                 }

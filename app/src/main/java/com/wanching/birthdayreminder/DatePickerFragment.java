@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by WanChing on 5/8/2017.
@@ -39,7 +40,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         cal.set(year, month, dayOfMonth);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
 
         String date = dateFormat.format(cal.getTime());
         EditText dateSelection = getActivity().findViewById(R.id.date_selection);

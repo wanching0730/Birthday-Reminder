@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/form_linear_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,61 +16,80 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:src="@drawable/login"/>
+        android:src="@drawable/login"
+        android:layout_margin="14sp"/>
 
     <TextView
+        android:text="@string/add_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:layout_margin="12dp" />
+        android:layout_gravity="center"
+        android:textStyle="italic"
+        android:textColor="@android:color/black"/>
 
     <EditText
         android:id="@+id/add_name"
+        android:hint="@string/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"/>
+        android:inputType="textCapWords"
+        android:layout_margin="14sp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/email_address"
-        android:layout_margin="12dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        style="@style/CommonLayoutWidthHeight">
 
-    <EditText
-        android:id="@+id/add_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/add_email"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            style="@style/CommonEditText"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/phone"
-        android:layout_margin="12dp"/>
+        <ImageView
+            android:src="@drawable/email"
+            style="@style/CommonImageView"/>
 
-    <EditText
-        android:id="@+id/add_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"/>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/bithday_date"
-        android:layout_margin="12dp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        style="@style/CommonLayoutWidthHeight">
 
-    <EditText
-        android:id="@+id/date_selection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:onClick="SetDate"/>
+        <EditText
+            android:id="@+id/add_phone"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            style="@style/CommonEditText"/>
+
+        <ImageView
+            android:src="@drawable/phone"
+            style="@style/CommonImageView"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        style="@style/CommonLayoutWidthHeight">
+
+        <EditText
+            android:id="@+id/date_selection"
+            android:hint="@string/bithday_date"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:onClick="SetDate"
+            style="@style/CommonEditText"/>
+
+        <ImageView
+            android:src="@drawable/cake"
+            style="@style/CommonImageView"/>
+
+    </LinearLayout>
 
     <Switch
         android:text="@string/notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:switchPadding="30dp"/>
+        android:switchPadding="30dp"
+        android:layout_margin="14sp"
+        android:textSize="16sp"/>
 </LinearLayout>
