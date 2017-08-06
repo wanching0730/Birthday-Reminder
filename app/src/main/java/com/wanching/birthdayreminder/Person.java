@@ -1,5 +1,7 @@
 package com.wanching.birthdayreminder;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +16,7 @@ public class Person implements Serializable{
     private String name;
     private String email;
     private String phone;
-    private byte[] image;
+    private static transient Bitmap image;
     private Date date;
     private boolean notify;
 
@@ -22,7 +24,7 @@ public class Person implements Serializable{
 //        this(0, "", "", Calendar.getInstance(), false);
 //    }
 
-    public Person(long id, String name, String email, String phone, byte[] image, Date date, boolean notify){
+    public Person(long id, String name, String email, String phone, Bitmap image, Date date, boolean notify){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -47,7 +49,7 @@ public class Person implements Serializable{
 
     public String getPhone(){return phone;}
 
-    public byte[] getImage(){return image;}
+    public Bitmap getImage(){return image;}
 
     public Date getDate(){return date;}
 
@@ -71,7 +73,7 @@ public class Person implements Serializable{
 
     public void setPhone(String phone){this.phone = phone;}
 
-    public void setImage(byte[] image){this.image = image;}
+    public void setImage(Bitmap image){this.image = image;}
 
     public void setNotify(boolean notify) {
         this.notify = notify;

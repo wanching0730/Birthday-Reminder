@@ -3,6 +3,10 @@ package com.wanching.birthdayreminder;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import java.io.ByteArrayOutputStream;
 
 /**
  * Created by WanChing on 4/8/2017.
@@ -37,7 +41,7 @@ public class BirthdayDbQueries {
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME, person.getName());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL, person.getEmail());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE, person.getPhone());
-        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, person.getImage());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, convertToByteArray(person));
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE, person.getDateAsCalendar().getTimeInMillis());
         values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY, person.isNotify());
 
@@ -45,6 +49,36 @@ public class BirthdayDbQueries {
         person.setId(id);
 
         return id;
+    }
+
+    public int update(Person person){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME, person.getName());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL, person.getEmail());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE, person.getPhone());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE, convertToByteArray(person));
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE, person.getDateAsCalendar().getTimeInMillis());
+        values.put(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY, person.isNotify());
+
+        String selection = BirthdayContract.BirthdayEntry._ID + " = ?";
+        String[] selectionArgs = {Long.toString(person.getId())};
+
+        return db.update(
+                BirthdayContract.BirthdayEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs
+        );
+    }
+
+    public byte[] convertToByteArray(Person person){
+        Bitmap imageBitmap = person.getImage();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        return byteArray;
     }
 
 }

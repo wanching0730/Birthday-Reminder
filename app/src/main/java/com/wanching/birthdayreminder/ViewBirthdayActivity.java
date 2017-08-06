@@ -2,10 +2,12 @@ package com.wanching.birthdayreminder;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -55,12 +57,13 @@ public class ViewBirthdayActivity extends AppCompatActivity {
         Cursor cursor = dbq.read(columns, selection, selectionArgs, null, null, null);
 
         if(cursor.moveToNext()){
+            byte[] imageByte = cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE));
             person = new Person(
                     cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)),
                     cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NAME)),
                     cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL)),
                     cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE)),
-                    cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE)),
+                    BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length),
                     new Date(cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE))),
                     changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY)))
             );
@@ -78,11 +81,14 @@ public class ViewBirthdayActivity extends AppCompatActivity {
             TextView tvLeft = (TextView) findViewById(R.id.left);
 
             Person.Countdown countdown = person.getCountdown();
+            final Calendar todayDate = Calendar.getInstance();
+            final Calendar thisYearBirthday = Calendar.getInstance();
+            thisYearBirthday.set(todayDate.get(Calendar.YEAR), person.getDateAsCalendar().get(Calendar.MONTH), person.getDateAsCalendar().get(Calendar.DAY_OF_MONTH));
 
             tvName.setText(person.getName());
             tvEmail.setText(person.getEmail());
             tvPhone.setText(person.getPhone());
-            tvDate.setText(new SimpleDateFormat("d MMM, ").format(person.getDate()) + Calendar.getInstance().get(Calendar.YEAR));
+            tvDate.setText(new SimpleDateFormat("EEEE, MMMM d, yyyy").format(thisYearBirthday.getTime()));
             tvDay.setText(Long.toString(countdown.getDays()));
             tvHour.setText(Long.toString(countdown.getHours()));
             tvMinute.setText(Long.toString(countdown.getMinutes()));
@@ -93,7 +99,7 @@ public class ViewBirthdayActivity extends AppCompatActivity {
             else
                 tvLeft.setText("Ago");
 
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }else{
             Log.e("id not found", Long.toString(cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID))));
             finish();
@@ -102,6 +108,13 @@ public class ViewBirthdayActivity extends AppCompatActivity {
 
     public boolean changeBoolean(int notify){
         return notify > 0;
+    }
+
+    public void EditBirthday(View view){
+        Intent intent = new Intent(getApplicationContext(), UpdateBirthdayActivity.class);
+        intent.putExtra(EXTRA_BIRTHDAY, person);
+        if(intent.resolveActivity(getPackageManager()) != null)
+            startActivity(intent);
     }
 
 

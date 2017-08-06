@@ -15,13 +15,13 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher_round"/>
+        android:src="@drawable/login"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
-        android:layout_margin="16dp" />
+        android:layout_margin="12dp" />
 
     <EditText
         android:id="@+id/add_name"
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email_address"
-        android:layout_margin="16dp"/>
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/add_email"
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/phone"
-        android:layout_margin="16dp"/>
+        android:layout_margin="12dp"/>
 
     <EditText
         android:id="@+id/add_phone"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bithday_date"
-        android:layout_margin="16dp" />
+        android:layout_margin="12dp" />
 
     <EditText
         android:id="@+id/date_selection"

@@ -33,6 +33,12 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:src="@drawable/image"
+                android:layout_margin="16sp"/>
+
             <TextView
                 android:id="@+id/show_name"
                 android:text="@string/name"
@@ -162,25 +168,28 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/edit"
+                android:id="@+id/btnEdit"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_edit" />
+                android:src="@android:drawable/ic_menu_edit"
+                android:onClick="EditBirthday"/>
 
             <ImageButton
-                android:id="@+id/message"
+                android:id="@+id/btnMessage"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/sym_action_email" />
+                android:src="@android:drawable/sym_action_email"
+                android:onClick="MessageWish"/>
 
             <ImageButton
-                android:id="@+id/delete"
+                android:id="@+id/btnDelete"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@android:drawable/ic_menu_delete" />
+                android:src="@android:drawable/ic_menu_delete"
+                android:onClick="DeleteBirthday"/>
 
         </LinearLayout>
 

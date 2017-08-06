@@ -2,6 +2,7 @@ package com.wanching.birthdayreminder;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
         String email = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_EMAIL));
         String phone = cursor.getString(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_PHONE));
         byte[] imageByte = cursor.getBlob(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_IMAGE));
+        Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
         Long date = cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_DATE));
         Date formattedDate = new Date(date);
 
@@ -43,7 +45,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
                 name,
                 email,
                 phone,
-                imageByte,
+                imageBitmap,
                 formattedDate,
                 changeBoolean(cursor.getInt(cursor.getColumnIndex(BirthdayContract.BirthdayEntry.COLUMN_NAME_NOTIFY))));
 
@@ -65,7 +67,7 @@ public class BirthdayCursorAdapter extends CursorAdapter {
         tvPhone.setText(phone);
         tvMonth.setText(DateFormat.format("MMM", formattedDate));
         tvDay.setText(DateFormat.format("dd", formattedDate));
-        ivImage.setImageBitmap(BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length));
+        ivImage.setImageBitmap(imageBitmap);
 
         if(Calendar.getInstance().get(Calendar.MONTH) < person.getDateAsCalendar().get(Calendar.MONTH)){
             tvCountdown.setText("Coming\nIn\n" +(Integer.parseInt(Long.toString(countdown.getDays()))-(newAge * 365)) + "\nDays");

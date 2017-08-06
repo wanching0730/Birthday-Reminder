@@ -22,10 +22,10 @@
         <activity
             android:name=".AddBirthdayActivity"
             android:label="@string/title_activity_add_birthday"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".ViewBirthdayActivity"
@@ -34,10 +34,12 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
-
-
+        <activity
+            android:name=".UpdateBirthdayActivity"
+            android:label="@string/title_activity_update_birthday"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

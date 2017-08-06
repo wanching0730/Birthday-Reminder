@@ -42,7 +42,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d, yyyy");
 
         String date = dateFormat.format(cal.getTime());
-        EditText dateSelection = (EditText) getActivity().findViewById(R.id.date_selection);
+        EditText dateSelection = getActivity().findViewById(R.id.date_selection);
         dateSelection.setText(date);
     }
 }

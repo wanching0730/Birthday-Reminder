@@ -8,5 +8,6 @@
     <string name="phone">Phone number</string>
     <string name="day_left">Left</string>
     <string name="notification">Show Notification</string>
+    <string name="title_activity_update_birthday">UpdateBirthdayActivity</string>
 
 </resources>

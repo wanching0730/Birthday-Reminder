@@ -27,20 +27,16 @@ import java.util.Locale;
 
 public class AddBirthdayActivity extends AppCompatActivity {
 
+    private static final int SELECT_IMAGE = 1;
     private EditText etName;
     private EditText etEmail;
-    private  EditText etPhone;
+    private EditText etPhone;
     private EditText etDate;
-
-    private static final int SELECT_IMAGE = 1;
-
     private Date newDate;
-
     private ImageView ivImage;
-
     private static Bitmap bitmap;
-
     private boolean saved = false;
+    private Conversion conversion;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
@@ -76,31 +72,36 @@ public class AddBirthdayActivity extends AppCompatActivity {
         fabSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    String name = etName.getText().toString();
-                    String email = etEmail.getText().toString();
-                    String phone = etPhone.getText().toString();
-                    String date = etDate.getText().toString();
 
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    byte [] photo = baos.toByteArray();
+                if(bitmap == null) {
+                    Toast.makeText(AddBirthdayActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setType("image/*");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(Intent.createChooser(intent, "Select an Image"), SELECT_IMAGE);
+                }else {
+                    try{
+                        String name = etName.getText().toString();
+                        String email = etEmail.getText().toString();
+                        String phone = etPhone.getText().toString();
+                        String date = etDate.getText().toString();
 
-                    SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
-                    newDate = formatter.parse(date);
+                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
+                        newDate = formatter.parse(date);
 
-                    BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
-                    Person person = new Person(0, name, email, phone, photo, newDate, false);
+                        BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
+                        Person person = new Person(0, name, email, phone, bitmap, newDate, false);
 
-                    if (dbq.insert(person) != 0) {
-                        saved = true;
-                        Toast.makeText(AddBirthdayActivity.this, "Person inserted successfully!", Toast.LENGTH_SHORT).show();
+                        if (dbq.insert(person) != 0) {
+                            saved = true;
+                            Toast.makeText(AddBirthdayActivity.this, "Person inserted successfully!", Toast.LENGTH_SHORT).show();
 
-                        finish();
+                            finish();
+                        }
+                    }catch (ParseException ex){
+                        ex.printStackTrace();
+                        Toast.makeText(AddBirthdayActivity.this, "Please select a date", Toast.LENGTH_SHORT).show();
                     }
-                }catch (ParseException ex){
-                    ex.printStackTrace();
-                    Toast.makeText(AddBirthdayActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -147,7 +148,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
             editor.putString("SAVE_STATE_DATE", date);
 
             if(bitmap != null)
-                editor.putString("SAVE_STATE_IMAGE", encodeToBase64(bitmap));
+                editor.putString("SAVE_STATE_IMAGE", conversion.encodeToBase64(bitmap));
         }
 
         editor.commit();
@@ -160,7 +161,6 @@ public class AddBirthdayActivity extends AppCompatActivity {
         String email = sharedPreferences.getString("SAVE_STATE_EMAIL", "");
         String phone = sharedPreferences.getString("SAVE_STATE_PHONE", "");
         String date = sharedPreferences.getString("SAVE_STATE_DATE", "");
-        String time = sharedPreferences.getString("SAVE_STATE_TIME", "");
 
         etName.setText(name);
         etEmail.setText(email);
@@ -171,22 +171,22 @@ public class AddBirthdayActivity extends AppCompatActivity {
             ivImage.setImageResource(R.drawable.login);
         else{
             String image = sharedPreferences.getString("SAVE_STATE_IMAGE", "");
-            ivImage.setImageBitmap(decodeToBase64(image));
+            ivImage.setImageBitmap(conversion.decodeToBase64(image));
         }
     }
 
-    public static String encodeToBase64(Bitmap image){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
-
-        Log.d("Image Log:", imageEncoded);
-        return  imageEncoded;
-    }
-
-    public static Bitmap decodeToBase64 (String input){
-        byte[] decodeByte = Base64.decode(input, 0);
-        return BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
-    }
+//    public static String encodeToBase64(Bitmap image){
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        image.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        byte[] b = baos.toByteArray();
+//        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+//
+//        Log.d("Image Log:", imageEncoded);
+//        return  imageEncoded;
+//    }
+//
+//    public static Bitmap decodeToBase64 (String input){
+//        byte[] decodeByte = Base64.decode(input, 0);
+//        return BitmapFactory.decodeByteArray(decodeByte, 0, decodeByte.length);
+//    }
 }

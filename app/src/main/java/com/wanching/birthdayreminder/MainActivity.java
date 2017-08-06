@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(MainActivity.this, ViewBirthdayActivity.class);
                 intent.putExtra(EXTRA_ID, cursor.getLong(cursor.getColumnIndex(BirthdayContract.BirthdayEntry._ID)));
-                startActivity(intent);
-            }
+                startActivity(intent);}
         });
     }
 
