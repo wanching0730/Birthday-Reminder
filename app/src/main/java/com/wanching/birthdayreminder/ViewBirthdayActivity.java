@@ -113,18 +113,18 @@ public class ViewBirthdayActivity extends AppCompatActivity {
         return notify > 0;
     }
 
-    public void EditBirthday(View view){
+    public void editBirthday(View view){
         Intent intent = new Intent(getApplicationContext(), UpdateBirthdayActivity.class);
         intent.putExtra(EXTRA_BIRTHDAY, person);
         if(intent.resolveActivity(getPackageManager()) != null)
             startActivity(intent);
     }
 
-    public  void DeleteBirthday (View view){
+    public  void deleteBirthday (View view){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewBirthdayActivity.this);
         builder .setCancelable(false)
-                .setMessage("Are you sure you want to delete?")
+                .setMessage("Are you sure you want to delete this record?")
                 .setPositiveButton("YES",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
@@ -142,8 +142,6 @@ public class ViewBirthdayActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.setTitle("WARNING");
         alert.show();
-
-
     }
 
 

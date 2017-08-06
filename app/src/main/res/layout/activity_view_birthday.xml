@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_edit"
-                android:onClick="EditBirthday"/>
+                android:onClick="editBirthday"/>
 
             <ImageButton
                 android:id="@+id/btnMessage"
@@ -181,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@android:drawable/sym_action_email"
-                android:onClick="MessageWish"/>
+                android:onClick="messageWish"/>
 
             <ImageButton
                 android:id="@+id/btnDelete"
@@ -189,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_delete"
-                android:onClick="DeleteBirthday"/>
+                android:onClick="deleteBirthday"/>
 
         </LinearLayout>
 

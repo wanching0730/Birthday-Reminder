@@ -81,6 +81,11 @@ public class BirthdayDbQueries {
         db.delete(BirthdayContract.BirthdayEntry.TABLE_NAME, selection, selectionArgs);
     }
 
+    public void deleteAll (){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        db.delete(BirthdayContract.BirthdayEntry.TABLE_NAME, null, null);
+    }
+
     public byte[] convertToByteArray(Person person){
         Bitmap imageBitmap = person.getImage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

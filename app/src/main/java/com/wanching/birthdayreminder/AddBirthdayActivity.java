@@ -34,7 +34,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
     private EditText etDate;
     private Date newDate;
     private ImageView ivImage;
-    private static Bitmap bitmap;
+    private Bitmap bitmap;
     private boolean saved = false;
     private Conversion conversion;
 
