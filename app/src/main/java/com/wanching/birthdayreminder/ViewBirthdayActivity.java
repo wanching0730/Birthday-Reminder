@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -122,12 +123,16 @@ public class ViewBirthdayActivity extends AppCompatActivity {
     }
 
     public void messageWish(View view){
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_SEND);
-        intent.putExtra(EXTRA_BIRTHDAY, R.string.birthday_wish);
-        Intent chooser = new Intent(Intent.createChooser(intent, "Please select an app to send your wishes"));
-        if(intent.resolveActivity(getPackageManager()) != null)
-            startActivity(chooser);
+        Uri uri = Uri.parse("smsto:" + person.getPhone());
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.birthday_wish));
+        startActivity(intent);
+//        Intent intent = new Intent();
+//        intent.setAction(Intent.ACTION_SEND);
+//        intent.putExtra(EXTRA_BIRTHDAY, R.string.birthday_wish);
+//        Intent chooser = new Intent(Intent.createChooser(intent, "Please select an app to send your wishes"));
+//        if(intent.resolveActivity(getPackageManager()) != null)
+//            startActivity(chooser);
     }
 
     public  void deleteBirthday (View view){
