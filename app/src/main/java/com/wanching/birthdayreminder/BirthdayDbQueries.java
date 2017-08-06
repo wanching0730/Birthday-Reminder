@@ -72,6 +72,15 @@ public class BirthdayDbQueries {
         );
     }
 
+    public void delete(long id){
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        String selection = BirthdayContract.BirthdayEntry._ID + " = ?";
+        String[] selectionArgs = {Long.toString(id)};
+
+        db.delete(BirthdayContract.BirthdayEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
     public byte[] convertToByteArray(Person person){
         Bitmap imageBitmap = person.getImage();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

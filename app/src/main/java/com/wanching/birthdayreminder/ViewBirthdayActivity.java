@@ -1,8 +1,10 @@
 package com.wanching.birthdayreminder;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -115,6 +118,32 @@ public class ViewBirthdayActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_BIRTHDAY, person);
         if(intent.resolveActivity(getPackageManager()) != null)
             startActivity(intent);
+    }
+
+    public  void DeleteBirthday (View view){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ViewBirthdayActivity.this);
+        builder .setCancelable(false)
+                .setMessage("Are you sure you want to delete?")
+                .setPositiveButton("YES",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
+                        dbq.delete(person.getId());
+                        Toast.makeText(getApplicationContext(), "Deleted " + person.getName(), Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.setTitle("WARNING");
+        alert.show();
+
+
     }
 
 
