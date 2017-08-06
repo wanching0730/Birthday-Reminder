@@ -34,7 +34,7 @@ public class AddBirthdayActivity extends AppCompatActivity {
     private EditText etDate;
     private Date newDate;
     private ImageView ivImage;
-    private Bitmap bitmap;
+    private Bitmap bitmap = null;
     private boolean saved = false;
     private Conversion conversion;
 
@@ -74,11 +74,11 @@ public class AddBirthdayActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(bitmap == null) {
-                    Toast.makeText(AddBirthdayActivity.this, "Please select an image", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddBirthdayActivity.this, "Please select an image to proceed", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent();
                     intent.setType("image/*");
                     intent.setAction(Intent.ACTION_GET_CONTENT);
-                    startActivityForResult(Intent.createChooser(intent, "Select an Image"), SELECT_IMAGE);
+                    startActivityForResult(Intent.createChooser(intent, "Select an option to insert image"), SELECT_IMAGE);
                 }else {
                     try{
                         String name = etName.getText().toString();
@@ -86,17 +86,21 @@ public class AddBirthdayActivity extends AppCompatActivity {
                         String phone = etPhone.getText().toString();
                         String date = etDate.getText().toString();
 
-                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
-                        newDate = formatter.parse(date);
+                        if(name.matches("") && email.matches("") && phone.matches("")){
+                            Toast.makeText(AddBirthdayActivity.this, "Please enter all details to proceed", Toast.LENGTH_SHORT).show();
+                        }else{
+                            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, MMMM d, yyyy", Locale.ENGLISH);
+                            newDate = formatter.parse(date);
 
-                        BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
-                        Person person = new Person(0, name, email, phone, bitmap, newDate, false);
+                            BirthdayDbQueries dbq = new BirthdayDbQueries(new BirthdayDbHelper(getApplicationContext()));
+                            Person person = new Person(0, name, email, phone, bitmap, newDate, false);
 
-                        if (dbq.insert(person) != 0) {
-                            saved = true;
-                            Toast.makeText(AddBirthdayActivity.this, "Person inserted successfully!", Toast.LENGTH_SHORT).show();
+                            if (dbq.insert(person) != 0) {
+                                saved = true;
+                                Toast.makeText(AddBirthdayActivity.this, "New record created successfully!", Toast.LENGTH_SHORT).show();
 
-                            finish();
+                                finish();
+                            }
                         }
                     }catch (ParseException ex){
                         ex.printStackTrace();
